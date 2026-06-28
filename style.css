@@ -1,0 +1,1442 @@
+/* ==========================================================================
+   1️⃣ الإعدادات الأساسية والمتغيرات العامة (Variables & Base Styles)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+:root {
+  --bg-color: #f0f4f8;
+  --panel-bg: #ffffff;
+  --text-main: #1e293b;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --border-color: #cbd5e1;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #0ea5e9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  padding: 30px 15px;
+  direction: rtl;
+}
+
+.main-wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ==========================================================================
+   2️⃣ مكونات وتنسيقات الواجهة العامة (UI Components & Cards)
+   ========================================================================== */
+.app-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.app-header h1 {
+  color: var(--primary);
+  font-size: 1.8rem;
+}
+
+.app-header p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+.widget-card {
+  background: var(--panel-bg);
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+}
+
+.widget-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+  color: #334155;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.section-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  padding-bottom: 12px;
+  margin-bottom: 15px;
+}
+
+.section-card-header h3 {
+  margin-bottom: 0 !important;
+}
+
+.section-add-btn {
+  display: none;
+  background: #e0e7ff;
+  color: #4f46e5;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.section-add-btn:hover {
+  background: #4f46e5;
+  color: white;
+  transform: scale(1.05);
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 10px 0;
+}
+
+/* الأزرار العامة */
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: white;
+}
+
+.btn-warning {
+  background-color: var(--warning);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #64748b;
+  color: white;
+}
+
+.btn-info {
+  background-color: var(--info);
+  color: white;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+/* عناصر الإدخال والاستمارات العامة */
+.simple-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.simple-input-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group.flex-expand {
+  flex: 1;
+  min-width: 220px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* ==========================================================================
+   3️⃣ أدوات المنصة المتخصصة (Widgets & Core Features)
+   ========================================================================== */
+
+/* لوحة التلعيّب (Gamification) */
+.gamification-widget {
+  background: linear-gradient(135deg, #1e1b4b, #311042);
+  color: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(30, 27, 75, 0.3);
+  border: none;
+}
+
+.gamification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.user-rank-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-rank-info h4 {
+  color: #fca5a5;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+.badge-level {
+  background-color: #4f46e5;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.streak-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.streak-fire-icon {
+  font-size: 1.8rem;
+  animation: pulse 1.5s infinite;
+}
+
+.streak-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#daily-streak-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.xp-bar-wrapper {
+  margin-top: 15px;
+}
+
+.xp-text-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.xp-gain-hint {
+  color: #a7f3d0;
+}
+
+.xp-bar-container {
+  width: 100%;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 6px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* شبكة توزيع الكروت العلوية */
+.top-row-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 25px;
+}
+
+/* مؤقت البومودورو */
+.pomodoro-widget {
+  text-align: center;
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 15px 0;
+  font-family: monospace;
+}
+
+.timer-status {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   تنسيق الاستمارة والحاوية المشتركة (Desktop)
+   ========================================================================== */
+
+#pomodoro-setup-form.active-form {
+  display: block !important; /* نلغي الفليكس من الاستمارة الأساسية لمنع تداخل الليبل */
+  margin: 20px auto;
+  max-width: 450px;
+  width: 100%;
+}
+
+#pomodoro-setup-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+}
+
+/* الحاوية السحرية التي تضع الحقل والزر بجانب بعضهما */
+.form-inline-inputs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#custom-minutes {
+  flex: 1; /* يجعله يأخذ كل المساحة المتاحة بجانب الزر بمرونة */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  height: 42px;
+}
+
+#Btnprimiry {
+  padding: 0 20px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap; 
+  font-weight: 600;
+  box-sizing: border-box;
+  height: 42px; /* نفس ارتفاع الحقل تماماً */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Btnprimiry:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   التجاوب الكامل مع الموبايل (Media Query - 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  #pomodoro-setup-form.active-form {
+    max-width: 100%;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px dashed var(--primary);
+    border-radius: 10px;
+  }
+
+  /* تحويل الحقل والزر ليصبحا تحت بعضهما على الموبايل لراحة العين */
+  .form-inline-inputs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  #custom-minutes {
+    width: 100%;
+    text-align: center;
+  }
+
+  #Btnprimiry {
+    width: 100%;
+    height: 45px;
+  }
+}
+
+/* الأصوات المحيطية (Soundscape) */
+.soundscape-widget {
+  background-color: var(--panel-bg);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.section-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.sound-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.sound-track-card {
+  background-color: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.sound-icon {
+  font-size: 1.8rem;
+}
+
+.sound-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-sound-toggle {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.btn-sound-toggle.playing {
+  background-color: #ef4444;
+}
+
+.volume-slider-wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+/* لوحة بناء العادات */
+.habits-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.habit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-right: 4px solid var(--info);
+}
+
+.habit-item.done {
+  border-right-color: var(--success);
+  background: #f0fdf4;
+}
+
+.habit-item span {
+  font-weight: 600;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.habit-streak-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* بطاقات الاستذكار الفعّال (Flashcards) */
+.flashcards-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.flashcards-display-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.flashcard-box {
+  width: 100%;
+  max-width: 500px;
+  height: 180px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flashcard-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.flashcard-front {
+  background-color: #eef2ff;
+  color: var(--primary);
+  border: 2px dashed var(--primary);
+}
+
+.flashcard-back {
+  background-color: #f0fdf4;
+  color: var(--success);
+  border: 2px solid var(--success);
+  transform: rotateY(180deg);
+}
+
+.flashcard-front p, .flashcard-back p {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.click-hint {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+.flashcard-evaluation {
+  display: flex;
+  gap: 10px;
+}
+
+.done-badge {
+  background: var(--success);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+/* مصفوفة إيزنهاور */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.matrix-box {
+  padding: 15px;
+  border-radius: 10px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quadrant-1 {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+}
+
+.quadrant-2 {
+  background: #fef3c7;
+  border: 1px solid #fde047;
+}
+
+.quadrant-3 {
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+}
+
+.quadrant-4 {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+}
+
+.matrix-box h4 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.matrix-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+  max-height: 140px;
+}
+
+.matrix-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.matrix-list li i {
+  cursor: pointer;
+  color: var(--danger);
+}
+
+/* إدارة جدول المهام */
+.schedule-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 10px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.schedule-form input, .schedule-form select {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: white;
+  outline: none;
+}
+
+.btn-height {
+  height: 45px;
+}
+
+.tools-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 300px;
+}
+
+.search-wrapper i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+}
+
+.responsive-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+tr.completed-task {
+  opacity: 0.5;
+  background-color: #f0fdf4 !important;
+}
+
+tr.completed-task td.editable-text {
+  text-decoration: line-through;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge.عالية {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+.badge.متوسطة {
+  background: #fef3c7;
+  color: var(--warning);
+}
+
+.badge.منخفضة {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.inline-edit-input {
+  width: 100%;
+  padding: 5px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  outline: none;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.hint {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.delete-row-btn, .check-row-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+}
+
+.delete-row-btn {
+  color: var(--danger);
+}
+
+.check-row-btn {
+  color: var(--success);
+}
+
+/* نوتس تفريغ الدماغ (Sticky Notes) */
+.sticky-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.sticky-note {
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+}
+
+.sticky-note textarea {
+  background: transparent;
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  height: 100%;
+  width: 100%;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.04);
+  padding-top: 5px;
+}
+
+.action-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* لوحة التقارير والتحليلات البيانية (Analytics) */
+.analytics-widget {
+  background-color: var(--panel-bg);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.analytics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.stat-box {
+  background-color: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.weekly-bar-chart-container {
+  background-color: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.chart-bars-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 150px;
+  padding-top: 10px;
+}
+
+.chart-bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-fill-vertical {
+  width: 25px;
+  background: linear-gradient(to top, var(--primary), #818cf8);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-day-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   4️⃣ مكونات القائمة الجانبية المخصصة للموبايل (Sidebar & Navigation Global)
+   ========================================================================== */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 8px;
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 280px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-sidebar.open {
+  right: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-sidebar-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-links li a {
+  display: block;
+  padding: 12px 15px;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-links li a:hover {
+  background: #f1f5f9;
+  color: var(--primary);
+  padding-right: 20px;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1999;
+  display: none;
+  backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+/* الزر العائم الفخم (FAB & Modal) */
+.floating-action-button {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary), #818cf8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  cursor: pointer;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-action-button:hover {
+  transform: scale(1.08) rotate(90deg);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+.modal-wrapper-fab {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-wrapper-fab.show {
+  display: flex;
+}
+
+.modal-content-fab {
+  background: white;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-header-fab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+.modal-header-fab h4 {
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.modal-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.modal-form-grid .form-group input, 
+.modal-form-grid .form-group select {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.btn-modal-submit {
+  width: 100%;
+  height: 45px;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   5️⃣ الشاشات الصغيرة والموبايل (Responsive Media Query - 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    padding: 15px 10px;
+  }
+
+  .main-wrapper {
+    gap: 15px;
+  }
+
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .app-header p {
+    font-size: 0.85rem;
+  }
+
+  .app-header {
+    padding-top: 20px;
+  }
+
+  .widget-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .widget-card h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .top-row-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* مؤقت البومودورو */
+  .timer-display {
+    font-size: 2.8rem;
+    margin: 10px 0;
+  }
+
+  .timer-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-controls .btn {
+    flex: 1;
+    min-width: 90px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    justify-content: center;
+  }
+
+  #pomodoro-setup-form.active-form {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px dashed #4f46e5;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  #pomodoro-setup-form .form-group {
+    width: 100%;
+    gap: 6px;
+  }
+
+  #pomodoro-setup-form label {
+    text-align: right;
+  }
+
+  #pomodoro-setup-form input[type="number"] {
+    width: 100% !important;
+    text-align: center;
+  }
+
+  #pomodoro-setup-form button#Btnprimary {
+    width: 100% !important;
+  }
+
+  /* الاستمارات والجداول */
+  .simple-input-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .simple-input-group button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .schedule-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .form-group.flex-expand {
+    min-width: 100%;
+  }
+
+  .btn-height {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tools-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .responsive-table-wrapper {
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th, td {
+    padding: 10px 8px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .table-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  /* الأدوات التفاعلية */
+  .matrix-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .matrix-box {
+    min-height: 160px;
+  }
+
+  .sound-controls-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .sound-track-card {
+    padding: 12px 8px;
+  }
+
+  .sound-icon {
+    font-size: 1.5rem;
+  }
+
+  .sound-name {
+    font-size: 0.8rem;
+  }
+
+  .notes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 12px;
+  }
+
+  .flashcard-box {
+    height: 150px;
+  }
+
+  .flashcard-front p, 
+  .flashcard-back p {
+    font-size: 0.95rem;
+  }
+
+  .flashcard-evaluation {
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .flashcard-evaluation .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .analytics-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .stat-box {
+    padding: 12px;
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
+  }
+
+  .chart-bars-flex {
+    height: 120px;
+  }
+
+  .bar-fill-vertical {
+    width: 14px;
+  }
+
+  .bar-day-label {
+    font-size: 0.6rem;
+    margin-top: 4px;
+  }
+
+  /* التحكم في عناصر الموبايل */
+  .hamburger-btn {
+    display: block;
+  }
+
+  .section-add-btn {
+    display: flex;
+  }
+
+  .section-mobile-form {
+    display: none !important;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px dashed #4f46e5;
+    animation: slideDownForm 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .section-mobile-form.active-form {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  #add-habit-form.active-form {
+    display: flex !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   6️⃣ الحركات والأنيميشن العامة (Animations)
+   ========================================================================== */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownForm {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inline-edit-input {
+  width: 100%;
+  padding: 8px 10px; /* زيادة الحشو الداخلي ليناسب شاشات اللمس */
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+  font-size: 16px; /* 💡 هام جداً: حجم الخط 16px يمنع متصفح Safari و Chrome في الآيفون والموبايل من عمل Zoom تلقائي مشوه عند فتح الحقل */
+  box-sizing: border-box;
+}

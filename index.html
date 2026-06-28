@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- وسوم السيو الأساسية (SEO Meta Tags) -->
+    <meta name="description"
+        content="المنصة المتكاملة لزيادة التركيز وتنظيم الوقت للطلاب باستخدام تقنيات علم الأعصاب، التكرار المتباعد، الكروت الذكية، ومصفوفة إيزنهاور بنظام التلعيب المحفز.">
+    <meta name="keywords"
+        content="تنظيم الوقت للطلاب, المذاكرة الذكية, التكرار المتباعد, كروت الاستذكار, مصفوفة ايزنهاور, بومودورو مؤقت, زيادة التركيز, الالتزام بالعادات">
+    <meta name="author" content="Mina Maged">
+
+    <!-- وسوم مشاركة الرابط على السوشيال ميديا (Facebook / WhatsApp / Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="منصة الإنتاجية والتركيز الفائقة للطلاب">
+    <meta property="og:description"
+        content="نظم خط سيرك اليومي، ابنِ عاداتك الذرية، وحارب منحنى النسيان في منصة واحدة مدمجة بنظام التلعيّب ونقاط الخبرة!">
+    <meta property="og:image" content="https://yourdomain.com/assets/preview-image.jpg">
+    <!-- ضع هنا رابطاً لصورة غلاف للموقع لاحقاً -->
+
+    <!-- وسوم منصة X (تويتر سابقاً) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="منصة الإنتاجية والتركيز الفائقة للطلاب">
+    <meta name="twitter:description"
+        content="نظم خط سيرك اليومي، ابنِ عاداتك الذرية، وحارب منحنى النسيان في منصة واحدة مدمجة بنظام التلعيّب!">
+
+
+    <title>The 5 AM Club | Productivity & Focus Hub</title>
+    <link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="./manifest.json">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <header class="app-header">
+            <button id="hamburger-menu-btn" class="hamburger-btn" onclick="toggleSidebar()"><i
+                    class="fa-solid fa-bars"></i></button>
+            <h1><i class="fa-solid fa-mug-hot"></i> The 5 AM Club</h1>
+            <p>النظام الشامل المدمج بأحدث علوم الأعصاب و أدوات الانتاجيه</p>
+        </header>
+
+        <div class="widget-card gamification-widget">
+            <div class="gamification-header">
+                <div class="user-rank-info">
+                    <span class="badge-level" id="user-level-badge">المستوى 1: مستجد 🎯</span>
+                    <h4 id="user-rank-title">رتبة: طالب مبتدئ 🎓</h4>
+                </div>
+                <div class="streak-container">
+                    <span class="streak-fire-icon">🔥</span>
+                    <div class="streak-text-wrapper">
+                        <span id="daily-streak-count">0 يوم</span>
+                        <small>أيام الالتزام المتتالية</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="xp-bar-wrapper">
+                <div class="xp-text-labels">
+                    <span id="current-xp-display">0 / 100 XP</span>
+                    <span class="xp-gain-hint">+10 XP عند إنهاء أي مهمة!</span>
+                </div>
+                <div class="xp-bar-container">
+                    <div class="xp-bar-fill" id="xp-progress-fill"></div>
+                </div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <div class="top-row-grid">
+            <div class="widget-card pomodoro-widget">
+                <div class="section-card-header">
+                    <h3><i class="fa-solid fa-brain"></i> وضع العمل العميق والمؤقت</h3>
+                    <button class="section-add-btn" onclick="openSectionForm('pomodoro-setup-form')">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <form id="pomodoro-setup-form" class="section-mobile-form" onsubmit="handleCustomTimer(event)">
+                    <div class="form-group">
+                        <label>وقت التركيز (بالدقائق):</label>
+                        <div class="form-inline-inputs">
+                            <input type="number" id="custom-minutes" placeholder="25" min="1">
+                            <button type="submit" class="btn btn-primary" id="Btnprimiry">تحديث الوقت</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="timer-display" id="pomodoro-timer">25:00</div>
+                <div class="timer-status" id="pomodoro-status">مستعد للبدء؟ 🎯</div>
+
+                <div class="timer-controls">
+                    <button id="pomodoro-start" class="btn btn-success"><i class="fa-solid fa-play"></i> ابدأ
+                        التركيز</button>
+                    <button id="pomodoro-pause" class="btn btn-warning"><i class="fa-solid fa-pause"></i> مؤقت</button>
+                    <button id="pomodoro-reset" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i>
+                        صفر</button>
+                </div>
+            </div>
+            <hr class="section-divider">
+            <div class="widget-card habits-widget">
+                <div class="section-card-header">
+                    <h3><i class="fa-solid fa-cubes"></i> بناء العادات الذرية اليومية</h3>
+                    <button class="section-add-btn" onclick="openSectionForm('add-habit-form')">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <form id="add-habit-form" class="simple-input-group section-mobile-form">
+                    <input type="text" id="new-habit-name" placeholder="مثال: قراءة 10 صفحات، شرب ماء..." required>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+                </form>
+                <div class="habits-container" id="habits-list"></div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <div class="widget-card soundscape-widget">
+            <h3><i class="fa-solid fa-headphones"></i> هندسة التركيز البيئي (Deep Work Sounds)</h3>
+            <p class="section-desc">شغّل الأصوات المحيطية لعزل تشتت الشارع والمنزل والدخول في حالة التركيز.</p>
+
+            <div class="sound-controls-grid">
+                <div data-sound="quite" class="sound-card">
+                    <span>موسيقى هادئة 🎵</span>
+                    <button class="btn-sound-toggle" onclick="togglePlaySound('quite', this)">تشغيل</button>
+                </div>
+
+                <div data-sound="focus" class="sound-card">
+                    <span>موسيقى للتركيز 🧠</span>
+                    <button class="btn-sound-toggle" onclick="togglePlaySound('focus', this)">تشغيل</button>
+                </div>
+
+                <div data-sound="lofi" class="sound-card">
+                    <span>موسيقى لوفي 🎧</span>
+                    <button class="btn-sound-toggle" onclick="togglePlaySound('lofi', this)">تشغيل</button>
+                </div>
+            </div>
+
+            <div class="volume-slider-wrapper">
+                <label for="global-volume">🎚️ درجة رفع الصوت العام:</label>
+                <input type="range" id="global-volume" min="0" max="1" step="0.1" value="0.5"
+                    oninput="changeVolume(this.value)">
+            </div>
+        </div>
+
+        <audio id="timer-alarm" src="sounds.mp3/miromaxmusic-music-promotion-no-copyright-513944.mp3"></audio>
+        <audio id="audio-quite" loop src="sounds.mp3/mickeyscat-moment-of-peace-mickeyscat-554494.mp3"></audio>
+        <audio id="audio-focus" loop src="sounds.mp3/grand_project-wonders-of-the-earth-550792.mp3"></audio>
+        <audio id="audio-lofi" loop src="sounds.mp3/apalonbeats-lofi-study-549455.mp3"></audio>
+
+        <hr class="section-divider">
+
+        <div class="widget-card sticky-section">
+            <div class="sticky-header">
+                <h3><i class="fa-solid fa-note-sticky"></i> لوحة تفريغ الدماغ والملاحظات الجانبية</h3>
+                <button id="add-note-btn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> </button>
+            </div>
+            <div class="notes-grid" id="notes-container"></div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="widget-card matrix-section">
+            <div class="section-card-header">
+                <h3><i class="fa-solid fa-chart-pie"></i> مصفوفة إيزنهاور للتصنيف التلقائي الذكي</h3>
+                <button class="section-add-btn" onclick="openSectionForm('matrix-generator-form')">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <form id="matrix-generator-form" class="schedule-form section-mobile-form"
+                style="background: #f1f5f9; padding: 15px; margin-bottom: 20px;">
+                <div class="form-group flex-expand">
+                    <label>المهمة أو الهدف المراد تصنيفه:</label>
+                    <input type="text" id="matrix-input-text" placeholder="مثال: تسليم بحث الكيمياء العملي..." required>
+                </div>
+                <div class="form-group">
+                    <label>طبيعة الوقت والأهمية:</label>
+                    <select id="matrix-input-urgency" required>
+                        <option value="urgent_important">⏰ عاجلة وضرورية جداً</option>
+                        <option value="not_urgent_important">📅 هامة لكن غير مستعجلة (للمستقبل)</option>
+                        <option value="low_importance">🌱 عادية / يمكن تأجيلها</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>مدى صعوبة المهمة:</label>
+                    <select id="matrix-input-difficulty" required>
+                        <option value="صعبة">🔴 صعبة (تحتاج طاقة عالية)</option>
+                        <option value="متوسطة" selected>🟡 متوسطة</option>
+                        <option value="سهلة">🟢 سهلة (تخلصها سريعاً)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-height">تصنيف وإضافة تلقائية</button>
+            </form>
+
+            <div class="matrix-grid">
+                <div class="matrix-box quadrant-1">
+                    <h4>🔥 عاجل ومهم (افعلها الآن)</h4>
+                    <ul id="list-q1" class="matrix-list"></ul>
+                </div>
+                <div class="matrix-box quadrant-2">
+                    <h4>📅 غير عاجل ولكن مهم (خطط لها)</h4>
+                    <ul id="list-q2" class="matrix-list"></ul>
+                </div>
+                <div class="matrix-box quadrant-3">
+                    <h4>🤝 عاجل وغير مهم (أنجزها سريعاً)</h4>
+                    <ul id="list-q3" class="matrix-list"></ul>
+                </div>
+                <div class="matrix-box quadrant-4">
+                    <h4>🗑️ غير عاجل وغير مهم (اتركها فوراً)</h4>
+                    <ul id="list-q4" class="matrix-list"></ul>
+                </div>
+            </div>
+        </div>
+        <hr class="section-divider">
+
+        <div class="widget-card timeline-section">
+            <div class="section-card-header">
+                <h3><i class="fa-solid fa-timeline"></i> خط السير اليومي (مرتب تلقائياً)</h3>
+                <button class="section-add-btn" onclick="openSectionForm('add-schedule-form')">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <form id="add-schedule-form" class="schedule-form section-mobile-form">
+                <div class="form-group">
+                    <label>وقت البدء:</label>
+                    <input type="time" id="new-start-time" required>
+                </div>
+                <div class="form-group">
+                    <label>المدة (دقائق):</label>
+                    <input type="number" id="new-duration" placeholder="45" min="1" required>
+                </div>
+                <div class="form-group flex-expand">
+                    <label>المادة الدراسية / النشاط العيني:</label>
+                    <input type="text" id="new-activity" placeholder="مراجعة شبكات، حل واجب علم نفس..." required>
+                </div>
+                <div class="form-group">
+                    <label>الأولوية:</label>
+                    <select id="new-priority" required>
+                        <option value="عالية">🔥 عالية</option>
+                        <option value="متوسطة" selected>⚡ متوسطة</option>
+                        <option value="منخفضة">🌱 منخفضة</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-height">جدولة وترتيب</button>
+            </form>
+
+            <div class="tools-bar">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="table-search" placeholder="ابحث في جدولك اليومي...">
+                </div>
+                <div class="actions-wrapper">
+                    <button id="bulk-delete-btn" class="btn btn-danger" style="display: none;"><i
+                            class="fa-solid fa-trash"></i> مسح المحدد</button>
+                </div>
+            </div>
+
+            <div class="responsive-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+
+                            <th>المادة / النشاط</th>
+                            <th>وقت البدء</th>
+                            <th>المدة</th>
+                            <th class="desktop-only">وقت الانتهاء المتوقع</th>
+                            <th>الأهمية</th>
+                            <th>الحالة</th>
+                            <th width="60">إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <span id="row-count">جاري الترتيب...</span>
+                <span class="hint"><i class="fa-solid fa-wand-magic-sparkles"></i> اضغط مرتين على أي خلية لتعديلها
+                    فوراً!</span>
+            </div>
+        </div>
+        <hr class="section-divider">
+
+        <div class="widget-card flashcards-section">
+            <div class="section-card-header">
+                <h3><i class="fa-solid fa-layer-group"></i> مولد الكروت الذكية (Active Recall)</h3>
+                <button class="section-add-btn" onclick="openSectionForm('add-flashcard-form')">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="flashcards-layout">
+                <form id="add-flashcard-form" class="schedule-form section-mobile-form"
+                    style="background: #f8fafc; padding: 15px;">
+                    <div class="form-group flex-expand">
+                        <label>السؤال (وجه الكارت):</label>
+                        <input type="text" id="fc-question" placeholder="مثال: ما هو قانون نيوتن الثاني؟" required>
+                    </div>
+                    <div class="form-group flex-expand">
+                        <label>الإجابة النموذجية (ظهر الكارت):</label>
+                        <input type="text" id="fc-answer" placeholder="مثال: القوة تساوي الكتلة في العجلة (F=ma)"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-height">إنشاء كارت</button>
+                </form>
+
+                <div class="flashcards-display-container">
+                    <div class="flashcard-box" id="active-flashcard" onclick="flipFlashcard()">
+                        <div class="flashcard-inner" id="fc-inner">
+                            <div class="flashcard-front">
+                                <p id="fc-front-text">أضف كروت مراجعة للبدء! 🧠</p>
+                                <span class="click-hint">اضغط لقلب الكارت ورؤية الإجابة</span>
+                            </div>
+                            <div class="flashcard-back">
+                                <p id="fc-back-text">هنا ستظهر الإجابة النموذجية.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-evaluation" id="fc-eval-buttons" style="display:none;">
+                        <button onclick="evaluateFlashcard('easy')" class="btn btn-success">🟢 سهل (إخفاء)</button>
+                        <button onclick="evaluateFlashcard('medium')" class="btn btn-warning">🟡 متوسط</button>
+                        <button onclick="evaluateFlashcard('hard')" class="btn btn-danger">🔴 صعب (تكرار)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="widget-card spaced-section">
+            <div class="section-card-header">
+                <h3><i class="fa-solid fa-calendar-check"></i> متتبع المراجعات الذكي (منحنى النسيان)</h3>
+                <button class="section-add-btn" onclick="openSectionForm('add-spaced-form')">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <form id="add-spaced-form" class="schedule-form section-mobile-form">
+                <div class="form-group flex-expand">
+                    <label>الدرس أو الشابتر الذي تم استذكاره اليوم:</label>
+                    <input type="text" id="spaced-topic"
+                        placeholder="مثال: درس انكسار الضوء، مراجعة الوحدة الأولى تاريخ..." required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-height">تفعيل جدول التكرار المتباعد</button>
+            </form>
+            <div class="responsive-table-wrapper" style="margin-top: 15px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الموضوع الدراسي</th>
+                            <th>تاريخ المذاكرة الأولى</th>
+                            <th>المراجعة 1 (بعد 24س)</th>
+                            <th>المراجعة 2 (بعد 3 أيام)</th>
+                            <th>المراجعة 3 (بعد 7 أيام)</th>
+                            <th>المراجعة 4 (بعد شهر)</th>
+                            <th>حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spaced-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+        <hr class="section-divider">
+
+        <div class="widget-card analytics-widget">
+            <h3><i class="fa-solid fa-chart-simple"></i> كشف الحساب الرقمي والإحصائيات الأسبوعية</h3>
+            <p class="section-desc">الأرقام لا تكذب. هنا ينكشف مجهودك الحقيقي هذا الأسبوع بدون تزييف.</p>
+
+            <div class="analytics-summary-grid">
+                <div class="stat-box">
+                    <span class="stat-number" id="stat-completed-tasks">0</span>
+                    <span class="stat-label">مهام أنجزت</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="stat-habits-score">0%</span>
+                    <span class="stat-label">نسبة الالتزام بالعادات</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="stat-efficiency-rate">0%</span>
+                    <span class="stat-label">معدل كفاءة الأسبوع</span>
+                </div>
+            </div>
+
+            <div class="weekly-bar-chart-container">
+                <h4 style="margin-bottom: 15px; font-size: 0.95rem; color: #64748b;">معدل إنتاجيتك اليومي مقارنة بالهدف:
+                </h4>
+                <div class="chart-bars-flex">
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-sat" style="height: 0%;"></div>
+                        <span class="bar-day-label">السبت</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-sun" style="height: 0%;"></div>
+                        <span class="bar-day-label">الأحد</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-mon" style="height: 0%;"></div>
+                        <span class="bar-day-label">الإثنين</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-tue" style="height: 0%;"></div>
+                        <span class="bar-day-label">الثلاثاء</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-wed" style="height: 0%;"></div>
+                        <span class="bar-day-label">الأربعاء</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-thu" style="height: 0%;"></div>
+                        <span class="bar-day-label">الخميس</span>
+                    </div>
+                    <div class="chart-bar-column">
+                        <div class="bar-fill-vertical" id="bar-fri" style="height: 0%;"></div>
+                        <span class="bar-day-label">الجمعة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+        <div class="sidebar-header">
+            👤 لوحة التحكم السريع
+            <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#" onclick="scrollToSection('.gamification-widget')">🎯 رتبتك في المنصه</a></li>
+            <li><a href="#" onclick="scrollToSection('.pomodoro-widget')">🧠 مؤقت العمل العميق</a></li>
+            <li><a href="#" onclick="scrollToSection('.habits-widget')">🌱 متتبع العادات الذرية</a></li>
+            <li><a href="#" onclick="scrollToSection('.flashcards-section')">🧠 الكروت الذكية (Active Recall)</a></li>
+            <li><a href="#" onclick="scrollToSection('.matrix-section')">📊 مصفوفة إيزنهاور</a></li>
+            <li><a href="#" onclick="scrollToSection('.timeline-section')">⏱️ جدولك اليومي</a></li>
+            <li><a href="#" onclick="scrollToSection('.sticky-section')">📝 تفريغ الدماغ</a></li>
+            <li><a href="#" onclick="scrollToSection('.analytics-widget')">📈 معدل انجازك</a></li>
+        </ul>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

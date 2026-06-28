@@ -1,0 +1,21 @@
+{
+  "short_name": "FocusApp",
+  "name": "Deep Work Soundscape & Pomodoro",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#1e1e2e",
+  "theme_color": "#ff6b6b",
+  "display": "standalone",
+  "orientation": "portrait"
+}
