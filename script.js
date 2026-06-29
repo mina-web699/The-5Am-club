@@ -541,7 +541,6 @@ window.togglePlaySound = function (soundType, btnElement) {
   }
 
   if (audio.paused) {
-    // جلب قيمة التحكم في الصوت الحالية وتطبيقها قبل التشغيل
     const volumeSlider = document.getElementById("global-volume");
     if (volumeSlider) {
       audio.volume = parseFloat(volumeSlider.value);
@@ -552,7 +551,7 @@ window.togglePlaySound = function (soundType, btnElement) {
       .then(() => {
         btnElement.innerText = "إيقاف";
         btnElement.classList.add("playing");
-        btnElement.style.backgroundColor = "#ef4444"; // تلوين الزر بالأحمر عند التشغيل
+        btnElement.style.backgroundColor = "#ef4444";
       })
       .catch((err) => {
         console.error("المتصفح منع التشغيل التلقائي:", err);
@@ -561,7 +560,7 @@ window.togglePlaySound = function (soundType, btnElement) {
     audio.pause();
     btnElement.innerText = "تشغيل";
     btnElement.classList.remove("playing");
-    btnElement.style.backgroundColor = ""; // إعادة اللون الافتراضي
+    btnElement.style.backgroundColor = "";
   }
 };
 
@@ -586,6 +585,14 @@ function initPomodoroAndSounds() {
   const status = document.getElementById("pomodoro-status");
   const alarm = document.getElementById("timer-alarm");
 
+  // دالة مخصصة لإيقاف جرس التنبيه تلقائياً عند التفاعل الجديد
+  function stopAlarmNotification() {
+    if (alarm) {
+      alarm.pause();
+      alarm.currentTime = 0;
+    }
+  }
+
   function stopAllActiveSounds() {
     ["quite", "focus", "lofi"].forEach((soundType) => {
       const audio = document.getElementById(`audio-${soundType}`);
@@ -608,12 +615,13 @@ function initPomodoroAndSounds() {
 
   if (startBtn) {
     startBtn.addEventListener("click", () => {
+      stopAlarmNotification(); // 🛑 إيقاف الجرس المزعج تلقائياً فور بدء الفترة الجديدة
       if (isRunning) return;
       isRunning = true;
       if (status)
         status.innerText = isBreak
           ? "وقت الراحة والاسترخاء ☕"
-          : "وضع العمل العميق نشط! اترك Mشتتات 📚";
+          : "وضع العمل العميق نشط! اترك المشتتات 📚";
 
       timer = setInterval(() => {
         if (timeLeft > 0) {
@@ -648,6 +656,7 @@ function initPomodoroAndSounds() {
 
   if (pauseBtn) {
     pauseBtn.addEventListener("click", () => {
+      stopAlarmNotification(); // 🛑 إيقاف الجرس لو أراد المستخدم الإيقاف المؤقت
       clearInterval(timer);
       isRunning = false;
       if (status) status.innerText = "المؤقت متوقف مؤقتاً ⏸️";
@@ -656,6 +665,7 @@ function initPomodoroAndSounds() {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
+      stopAlarmNotification(); // 🛑 إيقاف الجرس عند الضغط على إعادة تعيين
       clearInterval(timer);
       isRunning = false;
       stopAllActiveSounds();
@@ -854,7 +864,6 @@ document.querySelectorAll(".section-mobile-form").forEach((form) => {
 function makeRowEditable(element, rowId, fieldName, inputType) {
   if (element.querySelector("input")) return;
 
-  // 💡 تم إصلاح الخطأ البرمجي وربط الدالة بمصفوفتك الحقيقية مباشرة
   const targetRow = studentTimeline.find((row) => row.id === rowId);
   if (!targetRow) return;
 
@@ -881,9 +890,9 @@ function makeRowEditable(element, rowId, fieldName, inputType) {
         newValue = parseInt(newValue, 10) || originalValue;
       }
       targetRow[fieldName] = newValue;
-      sortAndRenderTimeline(); // 💡 تم ربطها بدالة تحديث ورندرة جدولك الحقيقية
-    } else {
       sortAndRenderTimeline();
+    } else {
+      sortAndRefresh();
     }
   }
 
@@ -896,7 +905,7 @@ function makeRowEditable(element, rowId, fieldName, inputType) {
   });
 }
 
-// تسجيل الـ Service Worker لتمكين العمل بدون إنترنت (Offline Mode)
+// ==================== 11. الـ Service Worker وميزة التثبيت المخصص الـ PWA ====================
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -911,42 +920,29 @@ if ("serviceWorker" in navigator) {
 let deferredPrompt;
 const installBtn = document.getElementById("install-btn");
 
-// 1. الاستماع لحدث التثبيت من المتصفح
 window.addEventListener("beforeinstallprompt", (e) => {
-  // منع المتصفح من إظهار الشريط الافتراضي القديم
   e.preventDefault();
-  // حفظ الحدث في المتغير لاستخدامه عند الضغط
   deferredPrompt = e;
-
-  // إظهار الزرار المخصص للمستخدم لأن التطبيق غير مثبت حالياً
-  installBtn.style.display = "block";
+  if (installBtn) installBtn.style.display = "block";
 });
 
-// 2. معالجة الضغط على الزرار
-installBtn.addEventListener("click", async () => {
-  if (deferredPrompt) {
-    // إظهار نافذة التثبيت الرسمية للمتصفح
-    deferredPrompt.prompt();
+if (installBtn) {
+  installBtn.addEventListener("click", async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`قرار المستخدم: ${outcome}`);
+      deferredPrompt = null;
+      installBtn.style.display = "none";
+    }
+  });
+}
 
-    // معرفة قرار المستخدم (هل وافق على التثبيت أم ألغى؟)
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`قرار المستخدم: ${outcome}`);
-
-    // تفريغ المتغير لأن العملية تمت
-    deferredPrompt = null;
-
-    // إخفاء الزرار فوراً لأن المستخدم ضغط عليه وبدأ التثبيت
-    installBtn.style.display = "none";
-  }
-});
-
-// 3. تأكيد إخفاء الزرار تماماً إذا تم التثبيت بنجاح (أو لو التطبيق مفتوح كـ App بالفعل)
 window.addEventListener("appinstalled", (evt) => {
   console.log("تم تثبيت التطبيق بنجاح على الشاشة الرئيسية!");
-  installBtn.style.display = "none";
+  if (installBtn) installBtn.style.display = "none";
 });
 
-// 4. ميزة إضافية: لو المستخدم فاتح التطبيق وهو مثبت بالفعل (Standalone)، نخفي الزرار تماماً تحسباً لأي كاش
 if (window.matchMedia("(display-mode: standalone)").matches) {
-  installBtn.style.display = "none";
+  if (installBtn) installBtn.style.display = "none";
 }
