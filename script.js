@@ -533,7 +533,7 @@ window.deleteNote = function (id) {
 // ==================== 8. مؤقت البومودورو والتحكم في الهندسة الصوتية ====================
 
 // 1. دالة التشغيل الفورية المتوافقة مع الموبايل والكمبيوتر
-window.togglePlaySound = function(soundType, btnElement) {
+window.togglePlaySound = function (soundType, btnElement) {
   const audio = document.getElementById(`audio-${soundType}`);
   if (!audio) {
     console.error(`خطأ: لم يتم العثور على عنصر الصوت: audio-${soundType}`);
@@ -547,13 +547,16 @@ window.togglePlaySound = function(soundType, btnElement) {
       audio.volume = parseFloat(volumeSlider.value);
     }
 
-    audio.play().then(() => {
-      btnElement.innerText = "إيقاف";
-      btnElement.classList.add("playing");
-      btnElement.style.backgroundColor = "#ef4444"; // تلوين الزر بالأحمر عند التشغيل
-    }).catch(err => {
-      console.error("المتصفح منع التشغيل التلقائي:", err);
-    });
+    audio
+      .play()
+      .then(() => {
+        btnElement.innerText = "إيقاف";
+        btnElement.classList.add("playing");
+        btnElement.style.backgroundColor = "#ef4444"; // تلوين الزر بالأحمر عند التشغيل
+      })
+      .catch((err) => {
+        console.error("المتصفح منع التشغيل التلقائي:", err);
+      });
   } else {
     audio.pause();
     btnElement.innerText = "تشغيل";
@@ -563,19 +566,22 @@ window.togglePlaySound = function(soundType, btnElement) {
 };
 
 // 2. دالة التحكم في مستوى الصوت العام (تتحكم في كل الأصوات الشغالة معاً)
-window.changeVolume = function(volumeValue) {
+window.changeVolume = function (volumeValue) {
   const parseFloatValue = parseFloat(volumeValue);
- ["quite", "focus", "lofi", "timer-alarm"].forEach((soundType) => {
-   const audio = document.getElementById(`audio-${soundType}`);
-   if (audio) {
-     audio.volume = parseFloatValue;
-   }
- });
+  ["quite", "focus", "lofi", "timer-alarm"].forEach((soundType) => {
+    const audio = document.getElementById(`audio-${soundType}`);
+    if (audio) {
+      audio.volume = parseFloatValue;
+    }
+  });
 };
 
 // 3. تهيئة مؤقت البومودورو والأزرار التابعة له
 function initPomodoroAndSounds() {
-  let timer, isRunning = false, timeLeft = 25 * 60, isBreak = false;
+  let timer,
+    isRunning = false,
+    timeLeft = 25 * 60,
+    isBreak = false;
   const display = document.getElementById("pomodoro-timer");
   const status = document.getElementById("pomodoro-status");
   const alarm = document.getElementById("timer-alarm");
@@ -589,7 +595,7 @@ function initPomodoroAndSounds() {
       }
     });
 
-    document.querySelectorAll(".btn-sound-toggle").forEach(btn => {
+    document.querySelectorAll(".btn-sound-toggle").forEach((btn) => {
       btn.innerText = "تشغيل";
       btn.classList.remove("playing");
       btn.style.backgroundColor = "";
@@ -604,25 +610,37 @@ function initPomodoroAndSounds() {
     startBtn.addEventListener("click", () => {
       if (isRunning) return;
       isRunning = true;
-      if (status) status.innerText = isBreak ? "وقت الراحة والاسترخاء ☕" : "وضع العمل العميق نشط! اترك Mشتتات 📚";
+      if (status)
+        status.innerText = isBreak
+          ? "وقت الراحة والاسترخاء ☕"
+          : "وضع العمل العميق نشط! اترك Mشتتات 📚";
 
       timer = setInterval(() => {
         if (timeLeft > 0) {
           timeLeft--;
-          let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-          if (display) display.innerText = `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
+          let m = Math.floor(timeLeft / 60),
+            s = timeLeft % 60;
+          if (display)
+            display.innerText = `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
         } else {
           if (alarm) {
-            alarm.play().catch(e => console.log("جرس المنبه واجه قيوداً:", e));
+            alarm
+              .play()
+              .catch((e) => console.log("جرس المنبه واجه قيوداً:", e));
           }
           clearInterval(timer);
           isRunning = false;
           stopAllActiveSounds();
           isBreak = !isBreak;
           timeLeft = isBreak ? 5 * 60 : 25 * 60;
-          if (status) status.innerText = isBreak ? "انتهت الجلسة! خذ راحة 5 دقائق 🎉" : "انتهت الراحة! لنعد للعمل العميق.. 💪";
-          let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-          if (display) display.innerText = `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
+          if (status)
+            status.innerText = isBreak
+              ? "انتهت الجلسة! خذ راحة 5 دقائق 🎉"
+              : "انتهت الراحة! لنعد للعمل العميق.. 💪";
+          let m = Math.floor(timeLeft / 60),
+            s = timeLeft % 60;
+          if (display)
+            display.innerText = `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
         }
       }, 1000);
     });
@@ -878,12 +896,57 @@ function makeRowEditable(element, rowId, fieldName, inputType) {
   });
 }
 
-
 // تسجيل الـ Service Worker لتمكين العمل بدون إنترنت (Offline Mode)
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('تم تفعيل نظام الأوفلاين الشامل للموقع بنجاح!', reg))
-      .catch(err => console.log('فشل تسجيل نظام الأوفلاين:', err));
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((reg) =>
+        console.log("تم تفعيل نظام الأوفلاين الشامل للموقع بنجاح!", reg),
+      )
+      .catch((err) => console.log("فشل تسجيل نظام الأوفلاين:", err));
   });
+}
+
+let deferredPrompt;
+const installBtn = document.getElementById("install-btn");
+
+// 1. الاستماع لحدث التثبيت من المتصفح
+window.addEventListener("beforeinstallprompt", (e) => {
+  // منع المتصفح من إظهار الشريط الافتراضي القديم
+  e.preventDefault();
+  // حفظ الحدث في المتغير لاستخدامه عند الضغط
+  deferredPrompt = e;
+
+  // إظهار الزرار المخصص للمستخدم لأن التطبيق غير مثبت حالياً
+  installBtn.style.display = "block";
+});
+
+// 2. معالجة الضغط على الزرار
+installBtn.addEventListener("click", async () => {
+  if (deferredPrompt) {
+    // إظهار نافذة التثبيت الرسمية للمتصفح
+    deferredPrompt.prompt();
+
+    // معرفة قرار المستخدم (هل وافق على التثبيت أم ألغى؟)
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`قرار المستخدم: ${outcome}`);
+
+    // تفريغ المتغير لأن العملية تمت
+    deferredPrompt = null;
+
+    // إخفاء الزرار فوراً لأن المستخدم ضغط عليه وبدأ التثبيت
+    installBtn.style.display = "none";
+  }
+});
+
+// 3. تأكيد إخفاء الزرار تماماً إذا تم التثبيت بنجاح (أو لو التطبيق مفتوح كـ App بالفعل)
+window.addEventListener("appinstalled", (evt) => {
+  console.log("تم تثبيت التطبيق بنجاح على الشاشة الرئيسية!");
+  installBtn.style.display = "none";
+});
+
+// 4. ميزة إضافية: لو المستخدم فاتح التطبيق وهو مثبت بالفعل (Standalone)، نخفي الزرار تماماً تحسباً لأي كاش
+if (window.matchMedia("(display-mode: standalone)").matches) {
+  installBtn.style.display = "none";
 }

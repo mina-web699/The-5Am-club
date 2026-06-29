@@ -1440,3 +1440,22 @@ tr.completed-task td.editable-text {
   font-size: 16px; /* 💡 هام جداً: حجم الخط 16px يمنع متصفح Safari و Chrome في الآيفون والموبايل من عمل Zoom تلقائي مشوه عند فتح الحقل */
   box-sizing: border-box;
 }
+
+#install-btn {
+    background-color: #ff6b6b; /* لون البومودورو */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 15px auto;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+#install-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
