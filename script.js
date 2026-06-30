@@ -946,3 +946,23 @@ window.addEventListener("appinstalled", (evt) => {
 if (window.matchMedia("(display-mode: standalone)").matches) {
   if (installBtn) installBtn.style.display = "none";
 }
+// دالة فتح وإغلاق نافذة سياسة الخصوصية
+function togglePrivacyModal(event) {
+    if (event) event.preventDefault(); // منع الرابط من إعادة تحميل الصفحة
+    const privacyModal = document.getElementById("privacy-modal");
+    if (privacyModal) {
+        if (privacyModal.style.display === "flex") {
+            privacyModal.style.display = "none";
+        } else {
+            privacyModal.style.display = "flex";
+        }
+    }
+}
+
+// إغلاق المودال تلقائياً لو ضغط المستخدم في أي مكان خارج الصندوق الأسود
+window.addEventListener("click", function(event) {
+    const privacyModal = document.getElementById("privacy-modal");
+    if (event.target === privacyModal) {
+        privacyModal.style.display = "none";
+    }
+});

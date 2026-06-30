@@ -1,3 +1,10 @@
+<!-- /*!
+* Project: The 5am Club - PWA
+* Version: 1.0.0
+* Copyright 2026 Mina Maged. All rights reserved.
+* Author Website: [https://mina-web699.github.io/The-5Am-club/]
+*/ -->
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -447,6 +454,54 @@
         </ul>
     </div>
     <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <!-- ==================== الفوتر المخصص (Footer) ==================== -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- قسم اللوجو والمعلومات الشخصية -->
+            <div class="footer-logo-zone">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-code-branch"></i>
+                    <span>Mina Maged</span>
+                </div>
+                <p class="footer-tagline">منصة الإنتاجية وتنظيم الوقت الذكي للدراسة والعمل العميق.</p>
+            </div>
+    
+            <!-- قسم الحقوق والروابط السريعة -->
+            <div class="footer-credits">
+                <p>&copy; 2026 جميع الحقوق محفوظة لـ <span class="highlight-name">مينا ماجد</span></p>
+    
+    
+                <div class="footer-links">
+                    <a href="#" onclick="togglePrivacyModal(event)">سياسة الخصوصية</a>
+                </div>
+    
+                <div class="footer-socials">
+                    <a href="https://wa.me/201148705202" target="_blank" title="WhatsApp"><i
+                            class="fa-brands fa-whatsapp"></i></a>
+                    <a href=" https://mina-web699.github.io/elmon-portfolio/" title="Portfolio" target="_blank"><i
+                            class="fa-solid fa-globe"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="privacy-modal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <span class="close-privacy-btn" onclick="togglePrivacyModal(event)">&times;</span>
+            <h2><i class="fa-solid fa-user-shield"></i> سياسة الخصوصية (Privacy Policy)</h2>
+            <hr>
+            <p>مرحباً بك في منصتنا. نحن نحترم خصوصيتك ونلتزم بحمايتها بالكامل:</p>
+            <ul>
+                <li><strong>تخزين البيانات:</strong> جميع بياناتك الدراسية، المهام، العادات، والملاحظات تُحفظ **محلياً
+                    فقط**
+                    داخل متصفحك (Local Storage) ولا نقوم بنقلها أو مشاركتها مع أي سيرفر خارجي.</li>
+                <li><strong>الملفات والـ PWA:</strong> نستخدم تقنية الـ Service Worker لتخزين ملفات الموقع مؤقتاً لضمان
+                    تشغيله بشكل كامل بدون إنترنت (Offline Mode).</li>
+                <li><strong>التحليلات:</strong> التطبيق لا يتتبع موقعك الجغرافي أو معلوماتك الشخصية الحساسة.</li>
+            </ul>
+            <p style="text-align: center; margin-top: 15px; color: #3b82f6; font-weight: bold;">إنتاجية آمنة 100% 🚀</p>
+        </div>
+    </div>
+
 
 
     <script src="script.js"></script>
