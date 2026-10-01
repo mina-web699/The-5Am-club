@@ -1,0 +1,28 @@
+{
+  "id": "/",
+  "short_name": "5AM Club",
+  "name": "The 5 AM Club | Productivity & Focus Hub",
+  "description": "المنصة المتكاملة لزيادة التركيز وتنظيم الوقت للطلاب: مؤقت عمل عميق، عادات ذرية، مواد دراسية، تكرار متباعد، وكروت استذكار.",
+  "categories": ["productivity", "education", "utilities"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#f6f5f2",
+  "theme_color": "#1c3a5e",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl"
+}
